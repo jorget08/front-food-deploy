@@ -9,6 +9,7 @@ export const FILTER_BY_NAME = "FILTER_BY_NAME"
 export const FILTER_BY_SCORE = "FILTER_BY_SCORE"
 export const FILTER_BY_DIET = "FILTER_BY_DIET"
 export const UPDATE_RECIPE = "UPDATE_RECIPE"
+export const DELETE_RECIPE = "DELETE_RECIPE"
 
 
 
@@ -82,9 +83,10 @@ export const filterByDiet = (payload) => {
   }
 }
 
-// export const deleteProduct = (payload) => {
-//   return {
-//     type: DELETE_PRODUCT,
-//     payload
-//   }
-// };
+export const deleteRecipe = (id) => {
+  return async function(dispatch){
+    return axios.delete(`https://food-deploy-proyect.herokuapp.com/delete/recipe/${id}`)
+    .then(response => dispatch({type: DELETE_RECIPE, payload:response.data}))
+    .catch(err => console.error(err))
+  }
+};

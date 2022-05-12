@@ -1,6 +1,19 @@
 // Importa las action types acá
 
-import { CLEAR_PAGE, CREATE_RECIPE, GET_ALL_TYPES, GET_ALL_RECIPES, GET_RECIPE_DETAIL, SEARCH_RECIPE, FILTER_BY_NAME, FILTER_BY_SCORE, FILTER_BY_DIET, UPDATE_RECIPE } from "../actions";
+import {
+    CLEAR_PAGE,
+    CREATE_RECIPE,
+    GET_ALL_TYPES,
+    GET_ALL_RECIPES,
+    GET_RECIPE_DETAIL,
+    SEARCH_RECIPE,
+    FILTER_BY_NAME,
+    FILTER_BY_SCORE,
+    FILTER_BY_DIET,
+    UPDATE_RECIPE,
+    DELETE_RECIPE
+} from "../actions";
+
 
 const initialState = {
   recipes: [],
@@ -109,6 +122,13 @@ const rootReducer = (state = initialState, action) => {
     //     ...state,
     //     productDetail: {}
     //   }
+    
+    case DELETE_RECIPE:
+      let recipess = state.recipes.filter(e => e.id !== action.payload)
+      return {
+        ...state,
+        recipes: recipess
+      }
 
     default:
       return state;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom';
-import { getRecipeDetail } from '../../redux/actions';
+import { useParams, useHistory } from 'react-router-dom';
+import { getRecipeDetail, deleteRecipe } from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
 import { Link } from 'react-router-dom';
 
@@ -10,12 +10,21 @@ const RecipeDetail = (props) => {
 
     const {id} = useParams()
     const recipe = useSelector(state => state.recipeDetail)
-
+    const history = useHistory();
     const dispatch = useDispatch()
 
     React.useEffect(() => {
         dispatch(getRecipeDetail(id))
     }, [dispatch, id])
+
+
+    function handleDelete(id){
+        dispatch(deleteRecipe(id))
+        history.push("/home");
+
+    }
+
+
     return (
         <div className='RecipeDetail'>
             <NavBar></NavBar>
@@ -50,13 +59,16 @@ const RecipeDetail = (props) => {
                             <p>{recipe.steps}</p>
                         </div>
                         }
-                        <div className='update-buttom'>
+                        <div className='buttoms'>
                         <Link to={`/update/${recipe.id}`}>
                             <div className='submit2'>
                                 <button>Update</button>
                             </div>
                         </Link>
-                    </div>
+                            <div className='submit2'>
+                                <button onClick={() => handleDelete(recipe.id)}>Delete Recipe</button>
+                            </div>
+                        </div>
                     </div>
                 </div>:
 
