@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {createRecipe, getTypes} from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
+import { useHistory } from 'react-router-dom';
 // import { useNavigate } from "react-router-dom"
 
 
@@ -25,6 +26,7 @@ const CreateRecipe = () => {
     const dispatch = useDispatch()
     const types = useSelector(state => state.types)
     const [errors, setError] = useState({})
+    const history = useHistory()
 
     // const navigate = useNavigate()
 
@@ -106,6 +108,7 @@ const CreateRecipe = () => {
                 steps: "",
                 diets: []
             })
+            history.push("/home");
             // navigate("/home")
         }
     }

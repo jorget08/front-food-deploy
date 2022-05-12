@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {updateRecipe, getRecipeDetail, getTypes} from '../../redux/actions';
 import NavBar from '../NavBar/NavBar';
 
@@ -25,6 +25,7 @@ function UpdateRecipe(props) {
     const types = useSelector(state => state.types)
     const [errors, setError] = useState({})
     const dispatch = useDispatch()
+    const history = useHistory()
 
 
     const [input, setInput] = useState({
@@ -100,6 +101,7 @@ function UpdateRecipe(props) {
                 steps: "",
                 diets: []
             })
+            history.push("/home");
             // navigate("/home")
         }
     }
